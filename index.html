@@ -3,25 +3,77 @@
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300" rel="stylesheet">
   </head>
   <body>
-    <script>
 
+    <script>
       $(document).ready(function(){
         var $body = $('body');
         $body.html('');
 
+        var $tweetRefresh = $('<h1><button class=refresh button>See Whats New!</button></h1>');
+        $tweetRefresh.prependTo($body);
+        
+        /*Start Custom Code Here:*/
+        
+        function returnNewTweets(){
+          var index = streams.home.length - 1;
+          while(index >= 0){
+          var tweet = streams.home[index];
+          var $tweet = $('<div></div>');
+          $tweet.text('@' + tweet.user + ': ' + tweet.message);
+          $tweet.appendTo($body);
+          index -= 1;
+          }
+        }
+
+
+
+
+        /*
+        Old: started on line 17:
         var index = streams.home.length - 1;
         while(index >= 0){
           var tweet = streams.home[index];
           var $tweet = $('<div></div>');
           $tweet.text('@' + tweet.user + ': ' + tweet.message);
           $tweet.appendTo($body);
+          $tweetRefresh.prependTo($body);
           index -= 1;
         }
+        */
+        
+
+        $('.refresh').on('click', returnNewTweets);
 
       });
-
     </script>
+
   </body>
 </html>
+
+<!--
+Notes:
+
+1) "users" is an array of strings: all the usernames i'm following
+
+2) "streams" is an object with teo properties:
+  - streams.home: array of all tweets from all the user's i'm following
+  - streams.users: object with properties for each user. 
+    - Example: streams.users.shawndrost has all of shawndrost's data 
+
+Minimum Requirements:
+
+1) Show the user new tweets somehow. (You can show them automatically as 
+   created, or create a button that displays new tweeks).
+
+2) Display the timestamp of when the tweets were created. This timestamp should
+   reflect the actual time the tweets were created, and should not just be hardcoded.
+
+3) Design interface so that you want to look at and use the product your making. 
+
+4) Allow the user to click on a username to see that user's timeline.
+
+-->
