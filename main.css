@@ -1,0 +1,59 @@
+/*
+=====================
+Body
+=====================
+*/
+
+body {
+  background: linear-gradient(135deg, #BBE6FF, #229DE5);
+  font-family: 'Roboto Slab';
+}
+
+/*
+=====================
+Tweets
+=====================
+*/
+
+div {
+  display: grid;
+  grid-template-columns: 25% 50% 25%;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  text-align: center;
+  margin: 25px 25px 25px 25px;
+  padding: 25px;
+  border: solid;
+  border-radius: 30px;
+}
+
+div {
+  background: #EDE9E0;
+  background-clip: padding-box;
+}
+
+/*
+=====================
+Refresh Button
+=====================
+*/
+
+.refresh {
+  background-color: #3F7FDE;
+  outline: none;
+  font-size: 150%;
+}
+
+button {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  text-align: center;
+  margin: 25px 25px 25px 25px;
+  padding: 25px;
+  border: solid;
+  border-radius: 30px;
+}
+
+button:hover {
+	background-color: #11DE23;
+}
