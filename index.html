@@ -5,50 +5,58 @@
     <script src="data_generator.js"></script>
     <link rel="stylesheet" type="text/css" href="main.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Skranji" rel="stylesheet">
+    <title>Twittler: Home</title>
   </head>
   <body>
 
     <script>
+
       $(document).ready(function(){
         var $body = $('body');
+        var $tweetRefresh = $('<h2><button class=refresh button>See Whats New!</button></h2>');
+        var index = streams.home.length - 1;
+        var firstNewTweet = $('div').length;
         $body.html('');
-
-        var $tweetRefresh = $('<h1><button class=refresh button>See Whats New!</button></h1>');
-        $tweetRefresh.prependTo($body);
+        $body.prepend('<h1 class="banner">TWITTLER!!!</h1>');
+        $tweetRefresh.appendTo($body);
         
         /*Start Custom Code Here:*/
-        
-        function returnNewTweets(){
-          var index = streams.home.length - 1;
-          while(index >= 0){
-          var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
-          $tweet.appendTo($body);
-          index -= 1;
-          }
-        }
-
-
-
-
-        /*
-        Old: started on line 17:
-        var index = streams.home.length - 1;
+        //Upon the page loading, list all current tweets:
         while(index >= 0){
           var tweet = streams.home[index];
           var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
-          $tweet.appendTo($body);
-          $tweetRefresh.prependTo($body);
+          $tweet.text(tweet.created_at +'\n@' + tweet.user + ': ' + tweet.message);
+          $tweet.insertBefore('h2');
+          $tweet.prepend(`<a href=Timeline_${tweet.user}.html>${tweet.user}</a>`);
           index -= 1;
         }
-        */
-        
 
+        function returnNewTweets(){
+          // Gather all streams that have been generated:
+          var index = streams.home.length - 1;
+
+          // Isolate index of first tweet that has not been displayed
+          // in browser. 
+          var firstNewTweet = $('div').length; 
+
+          // Iterate through the streams, pushing all new tweets to div elements. Tweets should appear in timestamp order (asc):
+          while(firstNewTweet < index){
+            var tweet = streams.home[firstNewTweet];
+            var $tweet = $('<div></div>');
+            $tweet.text(tweet.created_at +'\n@' + tweet.user + ': ' + tweet.message);
+            $tweet.insertBefore('h2');
+            $tweet.prepend(`<a href=Timeline_${tweet.user}.html>${tweet.user}</a>`);
+            firstNewTweet++;
+          }
+
+        }
+
+        // Refresh button to display new tweets:
         $('.refresh').on('click', returnNewTweets);
 
       });
+
     </script>
 
   </body>
