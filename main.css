@@ -6,7 +6,25 @@ Body
 
 body {
   background: linear-gradient(135deg, #BBE6FF, #229DE5);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   font-family: 'Roboto Slab';
+}
+
+/*
+=====================
+Title Banners
+=====================
+*/
+
+.banner{
+  font-family: 'Skranji';
+  font-size: xx-large;
+  text-decoration: underline;
+  padding: 25px;
+  text-align: center;
+  color: #143DFF
+
 }
 
 /*
@@ -17,11 +35,10 @@ Tweets
 
 div {
   display: grid;
-  grid-template-columns: 25% 50% 25%;
   grid-column-start: 2;
   grid-column-end: 3;
   text-align: center;
-  margin: 25px 25px 25px 25px;
+  margin: 0 25% 2.5% 25%;
   padding: 25px;
   border: solid;
   border-radius: 30px;
@@ -30,6 +47,19 @@ div {
 div {
   background: #EDE9E0;
   background-clip: padding-box;
+}
+
+/*
+=====================
+Refresh Button
+=====================
+*/
+
+h2 {
+  display: grid;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-template-columns: 25% 50% 25%;
 }
 
 /*
@@ -52,6 +82,7 @@ button {
   padding: 25px;
   border: solid;
   border-radius: 30px;
+  margin: ;
 }
 
 button:hover {
