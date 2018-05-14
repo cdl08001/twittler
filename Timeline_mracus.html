@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="jquery.js"></script>
+    <script src="data_generator.js"></script>
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Skranji" rel="stylesheet">
+    <title>Timeline: MRacus</title>
+  </head>
+  <body>
+
+    <script>
+
+      $(document).ready(function(){
+        var $body = $('body');
+        var $tweetRefresh = $('<h2><button class=refresh button>See Whats New!</button></h2>');
+        var index = streams.users.mracus.length - 1;
+        var firstNewTweet = $('div').length;
+        $body.html('');
+        $body.prepend('<h1 class="banner">MRacus\'s Timeline</h1>');
+        $tweetRefresh.appendTo($body);
+        
+        /*Start Custom Code Here:*/
+        //Upon the page loading, list all current tweets:
+        while(firstNewTweet < index){
+          var tweet = streams.users.mracus[firstNewTweet];
+          var $tweet = $('<div></div>');
+          $tweet.text(tweet.created_at +'\n@' + tweet.user + ': ' + tweet.message);
+          $tweet.insertBefore('h2');
+         firstNewTweet++;
+        }
+
+
+        function returnNewTweets(){
+          // Gather all streams that have been generated:
+          var currentIndex = streams.users.mracus.length - 1;
+
+          // Isolate currentIndex of first tweet that has not been displayed
+          // in browser. 
+          var currentFirstNewTweet = $('div').length; 
+      
+          // Iterate through the streams, pushing all new tweets to div elements if they belong to user X. Tweets should appear in timestamp order (asc):
+          while(currentFirstNewTweet < currentIndex){
+            var tweet = streams.users.mracus[currentFirstNewTweet];
+            var $tweet = $('<div></div>');
+            $tweet.text(tweet.created_at +'\n@' + tweet.user + ': ' + tweet.message);
+            $tweet.insertBefore('h2');
+            currentFirstNewTweet++;
+          }
+
+        }
+        // Refresh button to display new tweets:
+        $('.refresh').on('click', returnNewTweets);
+
+      });
+
+    </script>
+
+  </body>
+</html>
